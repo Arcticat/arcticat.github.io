@@ -73,4 +73,4 @@ Direction: distinctive but restrained — a personal feel achieved through typog
 
 ## Out of Scope (deliberately)
 
-- Comments, analytics, search, RSS beyond Astro's near-free RSS option, tags/categories, dark mode toggle, custom domain, CMS. All can be added later; none are needed at launch.
+- Comments, analytics, search, RSS, tags/categories, dark mode toggle, custom domain, CMS. All can be added later; none are needed at launch.
