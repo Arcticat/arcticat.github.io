@@ -1,0 +1,97 @@
+:root {
+  --ink: #1a2332;
+  --ink-soft: #55647a;
+  --bg: #fbfaf7;
+  --accent: #2b7a9b;
+  --accent-deep: #1d5a75;
+  --line: #e5e1d8;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  margin: 0 0 0.5em;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--accent-deep);
+}
+
+.container {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.site-header {
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header .container {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.site-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.site-name:hover {
+  color: var(--accent);
+}
+
+.site-nav a {
+  margin-left: 1.5rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+.site-nav a:hover {
+  color: var(--accent);
+}
+
+main.container {
+  padding-top: 3rem;
+  padding-bottom: 4rem;
+  min-height: 60vh;
+}
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.site-footer .container {
+  padding-top: 1.5rem;
+  padding-bottom: 2rem;
+}
