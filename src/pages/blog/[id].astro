@@ -25,6 +25,7 @@ const { Content } = await render(post);
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
+                timeZone: 'UTC',
               })
             }
           </time>
@@ -43,7 +44,7 @@ const { Content } = await render(post);
       <Content />
     </div>
     <footer class="post-footer">
-      <a class="pill" href="/blog">← All posts</a>
+      <a class="pill" href="/blog/">← All posts</a>
     </footer>
   </article>
 </BaseLayout>

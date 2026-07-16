@@ -24,8 +24,10 @@ Live at **https://arcticat.github.io**
    ```
 
    `tags` is optional (omit the line entirely if you don't want any).
-   Each tag automatically gets its own page at `/tags/<tag>/` listing
-   every post that carries it.
+   Tags must use only lowercase letters, digits, and hyphens (e.g.
+   `machine-learning`, not `Machine Learning`) — the build fails with a
+   clear message otherwise. Each tag automatically gets its own page at
+   `/tags/<tag>/` listing every post that carries it.
 
 3. Preview locally (optional): `npm run dev` → http://localhost:4321
 4. Publish:
