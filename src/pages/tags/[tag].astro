@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const tags = [...new Set(posts.flatMap((post) => post.data.tags))];
+  return tags.map((tag) => ({
+    params: { tag },
+    props: {
+      posts: posts
+        .filter((post) => post.data.tags.includes(tag))
+        .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()),
+    },
+  }));
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<BaseLayout title={`#${tag} · Chenghan Song`}>
+  <h1><span class="hash">#</span>{tag}</h1>
+  <p class="count">{posts.length} {posts.length === 1 ? 'post' : 'posts'} with this tag</p>
+  <div class="post-grid">
+    {posts.map((post) => <PostCard post={post} />)}
+  </div>
+  <a class="pill" href="/blog">← All posts</a>
+</BaseLayout>
+
+<style>
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 1rem 0 0.2rem;
+  }
+
+  .hash {
+    color: var(--sun);
+  }
+
+  .count {
+    color: var(--ink-soft);
+    margin: 0 0 1.5rem;
+  }
+
+  .post-grid {
+    margin-bottom: 1rem;
+  }
+</style>

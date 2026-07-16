@@ -2,6 +2,7 @@
 title: "Hello, World"
 date: 2026-07-15
 description: "First post — why I built this site and what to expect here."
+tags: ["testing"]
 ---
 
 Welcome to my corner of the internet.

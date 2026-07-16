@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
 
 const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -9,100 +10,86 @@ const posts = (await getCollection('blog'))
 
 <BaseLayout title="Chenghan Song">
   <section class="hero">
-    <h1>Hi, I'm Chenghan Song<span class="accent-dot">.</span></h1>
+    <h1>Hi, I'm <span class="mark">Chenghan Song</span> — I chase interesting data.</h1>
     <p class="bio">
       A data enthusiast who loves exploring new things. I write here about
       data, ideas, and whatever I'm currently curious about.
     </p>
-    <p>
-      <a class="email-link" href="mailto:s.chenghan@outlook.com"
-        >s.chenghan@outlook.com</a
-      >
-    </p>
   </section>
 
   <section class="recent">
-    <h2>Recent writing</h2>
-    <ul class="post-list">
-      {
-        posts.map((post) => (
-          <li>
-            <a href={`/blog/${post.id}/`}>{post.data.title}</a>
-            <time datetime={post.data.date.toISOString()}>
-              {post.data.date.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-              })}
-            </time>
-            <p>{post.data.description}</p>
-          </li>
-        ))
-      }
-    </ul>
-    <a href="/blog">All posts →</a>
+    <h2 class="section-title">Recent writing</h2>
+    <div class="post-grid">
+      {posts.map((post) => <PostCard post={post} />)}
+    </div>
+    <a class="pill all-posts" href="/blog">All posts →</a>
   </section>
 </BaseLayout>
 
 <style>
   .hero {
-    padding: 2rem 0 3rem;
+    position: relative;
+    overflow: hidden;
+    background: var(--panel);
+    border-radius: 20px;
+    padding: 2.6rem 2.4rem 2.4rem;
+    margin-bottom: 2.6rem;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -3.5rem;
+    top: -3.5rem;
+    width: 11rem;
+    height: 11rem;
+    border-radius: 50%;
+    background: var(--sun);
+    opacity: 0.9;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    right: 3.5rem;
+    bottom: -4.5rem;
+    width: 9rem;
+    height: 9rem;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.22;
+  }
+
+  .hero > * {
+    position: relative;
+    z-index: 1;
   }
 
   .hero h1 {
-    font-size: 2.75rem;
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    max-width: 24ch;
   }
 
-  .accent-dot {
+  .mark {
     color: var(--accent);
   }
 
   .bio {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--ink-soft);
-    max-width: 36rem;
+    max-width: 32rem;
+    margin: 0;
   }
 
-  .email-link {
-    font-size: 0.95rem;
+  .post-grid {
+    margin: 1.3rem 0 0.5rem;
   }
 
-  .recent h2 {
-    font-size: 1.5rem;
-    border-bottom: 1px solid var(--line);
-    padding-bottom: 0.5rem;
-  }
-
-  .post-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 1.5rem;
-  }
-
-  .post-list li {
-    padding: 1rem 0;
-  }
-
-  .post-list li a {
-    font-family: var(--font-display);
-    font-size: 1.2rem;
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  .post-list li a:hover {
-    text-decoration: underline;
-  }
-
-  .post-list time {
-    display: block;
-    font-size: 0.85rem;
-    color: var(--ink-soft);
-    margin-top: 0.15rem;
-  }
-
-  .post-list p {
-    margin: 0.35rem 0 0;
-    color: var(--ink-soft);
+  @media (max-width: 40rem) {
+    .hero {
+      padding: 2rem 1.5rem;
+    }
   }
 </style>

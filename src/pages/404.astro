@@ -3,6 +3,36 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="Not found · Chenghan Song">
-  <h1>Page not found</h1>
-  <p>That page doesn't exist. <a href="/">Head back home</a>.</p>
+  <div class="lost">
+    <div class="badge">404</div>
+    <h1>Page not found</h1>
+    <p>That page doesn't exist (or wandered off into the ice).</p>
+    <a class="pill" href="/">← Head back home</a>
+  </div>
 </BaseLayout>
+
+<style>
+  .lost {
+    text-align: center;
+    padding: 3rem 0 2rem;
+  }
+
+  .badge {
+    display: inline-grid;
+    place-items: center;
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    background: var(--sun);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 2rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .lost p {
+    color: var(--ink-soft);
+    margin: 0 0 1.6rem;
+  }
+</style>

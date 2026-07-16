@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
 
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
@@ -9,61 +10,16 @@ const posts = (await getCollection('blog')).sort(
 
 <BaseLayout title="Blog · Chenghan Song">
   <h1>Blog</h1>
-  <ul class="post-list">
-    {
-      posts.map((post) => (
-        <li>
-          <a href={`/blog/${post.id}/`}>{post.data.title}</a>
-          <time datetime={post.data.date.toISOString()}>
-            {post.data.date.toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'short',
-              day: 'numeric',
-            })}
-          </time>
-          <p>{post.data.description}</p>
-        </li>
-      ))
-    }
-  </ul>
+  <div class="post-grid">
+    {posts.map((post) => <PostCard post={post} />)}
+  </div>
 </BaseLayout>
 
 <style>
   h1 {
-    font-size: 2.25rem;
-  }
-
-  .post-list {
-    list-style: none;
-    padding: 0;
-    margin: 1.5rem 0 0;
-  }
-
-  .post-list li {
-    padding: 1.1rem 0;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .post-list li a {
-    font-family: var(--font-display);
-    font-size: 1.3rem;
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  .post-list li a:hover {
-    text-decoration: underline;
-  }
-
-  .post-list time {
-    display: block;
-    font-size: 0.85rem;
-    color: var(--ink-soft);
-    margin-top: 0.15rem;
-  }
-
-  .post-list p {
-    margin: 0.35rem 0 0;
-    color: var(--ink-soft);
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 1rem 0 1.5rem;
   }
 </style>

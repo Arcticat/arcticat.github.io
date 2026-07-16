@@ -15,48 +15,73 @@ const { Content } = await render(post);
 ---
 
 <BaseLayout title={`${post.data.title} · Chenghan Song`} description={post.data.description}>
-  <article>
+  <article class="post">
     <header class="post-header">
-      <h1>{post.data.title}</h1>
-      <time datetime={post.data.date.toISOString()}>
+      <span class="chips">
+        <span class="chip">
+          <time datetime={post.data.date.toISOString()}>
+            {
+              post.data.date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })
+            }
+          </time>
+        </span>
         {
-          post.data.date.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })
+          post.data.tags.map((tag) => (
+            <a class="chip chip--tag" href={`/tags/${tag}/`}>
+              {tag}
+            </a>
+          ))
         }
-      </time>
+      </span>
+      <h1>{post.data.title}</h1>
     </header>
     <div class="post-body">
       <Content />
     </div>
+    <footer class="post-footer">
+      <a class="pill" href="/blog">← All posts</a>
+    </footer>
   </article>
 </BaseLayout>
 
 <style>
-  .post-header h1 {
-    font-size: 2.25rem;
-    margin-bottom: 0.25rem;
+  .post {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 3rem 2.6rem 2.6rem;
+    box-shadow: 0 3px 0 var(--card-edge);
   }
 
-  .post-header time {
-    color: var(--ink-soft);
-    font-size: 0.9rem;
+  .post-header,
+  .post-body,
+  .post-footer {
+    max-width: 44rem;
+    margin-inline: auto;
+  }
+
+  .post-header h1 {
+    font-size: clamp(1.8rem, 4.5vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0.7rem 0 0;
   }
 
   .post-body {
-    margin-top: 2rem;
+    margin-top: 1.6rem;
   }
 
   .post-body :global(img) {
     max-width: 100%;
-    border-radius: 6px;
+    border-radius: 12px;
   }
 
   .post-body :global(pre) {
-    padding: 1rem;
-    border-radius: 6px;
+    padding: 1rem 1.2rem;
+    border-radius: 12px;
     overflow-x: auto;
     font-size: 0.9rem;
   }
@@ -64,7 +89,17 @@ const { Content } = await render(post);
   .post-body :global(blockquote) {
     margin: 1.5rem 0;
     padding-left: 1rem;
-    border-left: 3px solid var(--accent);
+    border-left: 4px solid var(--sun);
     color: var(--ink-soft);
+  }
+
+  .post-footer {
+    margin-top: 2.2rem;
+  }
+
+  @media (max-width: 40rem) {
+    .post {
+      padding: 1.6rem 1.3rem;
+    }
   }
 </style>

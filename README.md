@@ -16,11 +16,16 @@ Live at **https://arcticat.github.io**
    title: "My Post Title"
    date: 2026-08-01
    description: "One-line summary shown in post lists."
+   tags: ["data", "python"]
    ---
 
    Post body in Markdown. Images: put the file next to this one and
    reference it as ![alt text](./image.jpg).
    ```
+
+   `tags` is optional (omit the line entirely if you don't want any).
+   Each tag automatically gets its own page at `/tags/<tag>/` listing
+   every post that carries it.
 
 3. Preview locally (optional): `npm run dev` → http://localhost:4321
 4. Publish:

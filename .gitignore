@@ -6,3 +6,6 @@ dist/
 # Local planning docs — keep off GitHub
 docs/
 .superpowers/
+
+# Local screenshots dropped in for design feedback
+Screenshot*.png
